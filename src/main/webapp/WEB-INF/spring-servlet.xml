@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+  <!-- Web configuration -->
+
+  <context:component-scan base-package="com.maxheapsize"/>
+  <mvc:annotation-driven/>
+
+
+  <!-- freemarker config -->
+  <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="template_exception_handler">rethrow</prop>
+      </props>
+    </property>
+
+  </bean>
+
+  <!--
+  View resolvers can also be configured with ResourceBundles or XML files. If you need
+  different view resolving based on Locale, you have to use the resource bundle resolver.
+-->
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+    <property name="cache" value="true"/>
+    <property name="prefix" value=""/>
+    <property name="suffix" value=".ftl"/>
+    <property name="order" value="1"/>
+    <!-- if you want to use the Spring FreeMarker macros, set this property to true -->
+    <!--<property name="exposeSpringMacroHelpers" value="true"/>-->
+  </bean>
+
+
+</beans>
