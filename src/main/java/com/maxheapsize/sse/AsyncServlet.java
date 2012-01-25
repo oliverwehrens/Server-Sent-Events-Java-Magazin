@@ -25,10 +25,10 @@ public class AsyncServlet extends HttpServlet {
 
     final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(4);
 
-    // send the events in 2 seconds from now
+    // send the events in 5 seconds from now, every 2 seconds
    scheduledExecutorService.scheduleWithFixedDelay(new ServerEventsSender(aCtx.getResponse()), 5, 2, TimeUnit.SECONDS);
 
-    // close the AsyncContext after 10 seconds, processing ends
+    // close the AsyncContext after 30 seconds, processing ends
     scheduledExecutorService.schedule(new Runnable() {
       @Override public void run() {
         scheduledExecutorService.shutdown();

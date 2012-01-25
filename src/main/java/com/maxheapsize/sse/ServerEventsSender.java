@@ -22,21 +22,11 @@ public class ServerEventsSender implements Runnable {
     try {
       Date date = new Date();
       response.setContentType("text/event-stream; charset=utf-8");
-      response.getWriter().
-          append("retry: 5000\n").
-          append("event: hey\n").
-          append("data: START\n\n");
 
-      response.flushBuffer();
       response.getWriter().
-          append("retry: 5000\n").
+          append("retry: 35000\n").
           append("event: hey\n").
-          append("data: Hey I was created at " + date.toString() + "(" + System.currentTimeMillis() + ")\n\n");
-      response.flushBuffer();
-      response.getWriter().
-          append("retry: 5000\n").
-          append("event: hey\n").
-          append("data: END\n\n");
+          append("data: I was created by an async Servlet at " + date.toString() + " (" + System.currentTimeMillis() + ")\n\n");
 
       // important, flush the response
       response.flushBuffer();
