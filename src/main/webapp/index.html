@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+      font-size: 13px;
+      line-height: 18px;
+      color: #737373;
+      margin: 10px 13px 10px 13px;
+    }
+
+    a {
+      color: #0069d6;
+    }
+
+    a:hover {
+      color: #0050a3;
+      text-decoration: none;
+    }
+
+    a img {
+      border: none;
+    }
+
+    p {
+      margin-bottom: 9px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #404040;
+      line-height: 36px;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: 30px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+
+    h5 {
+      font-size: 14px;
+    }
+
+    h6 {
+      font-size: 13px;
+    }
+
+    hr {
+      margin: 0 0 19px;
+      border: 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    blockquote {
+      padding: 13px 13px 21px 15px;
+      margin-bottom: 18px;
+      font-family: georgia, serif;
+      font-style: italic;
+    }
+
+    blockquote:before {
+      content: "\201C";
+      font-size: 40px;
+      margin-left: -10px;
+      font-family: georgia, serif;
+      color: #eee;
+    }
+
+    blockquote p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 18px;
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    code, pre {
+      font-family: Monaco, Andale Mono, Courier New, monospace;
+    }
+
+    code {
+      background-color: #fee9cc;
+      color: rgba(0, 0, 0, 0.75);
+      padding: 1px 3px;
+      font-size: 12px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+    pre {
+      display: block;
+      padding: 14px;
+      margin: 0 0 18px;
+      line-height: 16px;
+      font-size: 11px;
+      border: 1px solid #d9d9d9;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    pre code {
+      background-color: #fff;
+      color: #737373;
+      font-size: 11px;
+      padding: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      body {
+        width: 748px;
+        margin: 10px auto;
+      }
+    }
+  </style>
+  <title>index.html</title>
+</head>
+<body>
+<h2>Demo for Server Sent Events</h2>
+
+<p><a href="sync.html">sync.html</a> Call which returns right after some events are written</p>
+
+<p><a href="async.html">async.html</a> Call will also return right away, but will write async events to the Http Response</p>
+
+
+
+Look at the logfile of your tomcat to see when and how the async call gets processed.
+You also need to change your tomcat's server.xml to match the following connector. 
+<a href="http://caniuse.com/eventsource">Make sure you have a decent browser.</a>
+
+
+<pre><code>&lt;Connector port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol"
+  minProcessors="3"
+  maxProcessors="8"
+  maxThreads="20"
+  connectionTimeout="150000"
+  asyncTimeout="150000" /&gt;
+</code></pre>
+
+<p>This example was tested using Tomcat 7 with Servlet 3.0 support.
+</p>
+
+<p>Have Fun.</p>
+
+<p>Oliver Wehrens</p>
+</body>
+</html>

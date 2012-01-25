@@ -1,0 +1,27 @@
+<html>
+<head>
+
+  <script type='text/javascript'>
+
+    if (window.EventSource) {
+      var eventSource = new EventSource('http://localhost:8080/event');
+      eventSource.addEventListener('hey', function (e) {
+        ev = document.getElementById('events');
+        ev.innerHTML += "<br>[NEW Event] " + event.data;
+      }, false);
+
+    }
+    else {
+      alert("No Event source support.")
+    }
+
+  </script>
+</head>
+<body>
+
+Asynchronous Example
+
+<div id="events"></div>
+
+</body>
+</html>

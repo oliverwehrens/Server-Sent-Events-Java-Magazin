@@ -1,0 +1,27 @@
+<html>
+<head>
+
+  <script type='text/javascript'>
+
+    if (window.EventSource) {
+      var eventSource = new EventSource('http://localhost:8080/sync');
+      eventSource.addEventListener('syncevent', function (e) {
+        ev = document.getElementById('events');
+        ev.innerHTML += "<br>[NEW Event] " + event.data;
+      }, false);
+
+    }
+    else {
+      alert("No Event source support.")
+    }
+
+  </script>
+</head>
+<body>
+
+Synchronous Example
+
+<div id="events"></div>
+
+</body>
+</html>
