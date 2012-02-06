@@ -8,7 +8,7 @@
       eventSource.addEventListener('syncevent', function (e) {
         ev = document.getElementById('events');
         ev.innerHTML += "<br>[NEW Event] " + event.data;
-      }, false);
+      });
 
     }
     else {

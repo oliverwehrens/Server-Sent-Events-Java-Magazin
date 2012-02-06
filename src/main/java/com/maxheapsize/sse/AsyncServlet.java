@@ -21,18 +21,18 @@ public class AsyncServlet extends HttpServlet {
     System.out.println("Entering the Servlet. ("+new Date().toString()+")");
 
     // start Async processing
-    final AsyncContext aCtx = request.startAsync();
+    final AsyncContext asyncContext = request.startAsync();
 
-    final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(4);
+    final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(4);
 
     // send the events in 5 seconds from now, every 2 seconds
-   scheduledExecutorService.scheduleWithFixedDelay(new ServerEventsSender(aCtx.getResponse()), 5, 2, TimeUnit.SECONDS);
+   executorService.scheduleWithFixedDelay(new ServerEventsSender(asyncContext.getResponse()), 5, 2, TimeUnit.SECONDS);
 
     // close the AsyncContext after 30 seconds, processing ends
-    scheduledExecutorService.schedule(new Runnable() {
+    executorService.schedule(new Runnable() {
       @Override public void run() {
-        scheduledExecutorService.shutdown();
-        aCtx.complete();
+        executorService.shutdown();
+        asyncContext.complete();
       }
     }, 30, TimeUnit.SECONDS);
 
